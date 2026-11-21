@@ -1,0 +1,64 @@
+# Antigravity Project Instructions & Architecture Guidelines
+
+## Architecture & Package Structure Standards
+Strictly follow the project clean architecture package structure across all code generation and modifications without needing repeated instructions:
+
+```
+app/src/main/java/com/examplealam292/pdfmaker/
+│
+├── MyApplication.kt
+├── MainActivity.kt
+│
+├── core/
+│   ├── common/
+│   ├── designsystem/
+│   │   ├── theme/
+│   │   ├── components/
+│   │   └── typography/
+│   ├── navigation/
+│   ├── network/
+│   ├── database/
+│   ├── datastore/
+│   ├── security/
+│   └── utils/
+│
+├── data/
+│   ├── local/
+│   │   ├── dao/
+│   │   ├── entity/
+│   │   └── database/
+│   ├── remote/
+│   │   ├── api/
+│   │   ├── dto/
+│   │   └── interceptor/
+│   ├── mapper/
+│   └── repository/
+│
+├── domain/
+│   ├── model/
+│   ├── repository/
+│   └── usecase/
+│
+├── feature/
+│   ├── splash/
+│   ├── onboarding/
+│   ├── auth/
+│   │   ├── login/
+│   │   ├── register/
+│   │   └── forgotpassword/
+│   ├── home/
+│   ├── profile/
+│   └── settings/
+│   └── [feature_name]/
+│
+├── di/
+└── worker/
+```
+
+## Layer Responsibilities
+1. **`core/`**: Cross-cutting utilities, theme/design tokens, navigation routes/graphs, network clients, base classes.
+2. **`data/`**: Data sources (Room DAOs, Retrofit/Ktor APIs, DataStore), DTOs, entities, and repository implementations.
+3. **`domain/`**: Pure Kotlin business models, repository interfaces, and use cases (no Android framework dependencies).
+4. **`feature/`**: Feature-specific UI screens, Jetpack Compose components, and ViewModels grouped by feature.
+5. **`di/`**: Dependency injection modules (Hilt / Koin).
+6. **`worker/`**: Background WorkManager workers.
